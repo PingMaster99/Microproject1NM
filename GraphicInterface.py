@@ -97,7 +97,7 @@ rstitle = Label(window, text="Resultado", bg="#3891A6", fg="BLACK")
 rstitle.config(font=("Arial", 20))
 rstitle.grid(row = 6, column = 1)
 
-
+#Change file location of image
 photo= PhotoImage (file = r"C:\Users\crade\Dropbox\Ingenieria Mecatronica\Cuarto Año     - 2021\Primer Semestre\Digital 2\Labs\Github\Metodos\Microproject1NM\circuit.png")
 imagen= Button(window, image=photo, padx = 50, pady =50)
 imagen.grid(row =8, column = 2)
