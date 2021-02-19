@@ -38,8 +38,7 @@ def calculate_circuit(voltage, resistance, power, error):
     if resistance == 0 and power == 0:
         return None
 
-    starting_point = voltage / resistance if resistance > 0 else 0
-    result = fixed_point(kirchhoff, starting_point, error, 100)
+    result = fixed_point(kirchhoff, 1, error, 100)
     if result is not None:
         return result[0]
 
