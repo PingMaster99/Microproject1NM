@@ -3,6 +3,7 @@ import CalculationMethods as Cm
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 def calculate():
     try:
         v = float(voltage.get())
@@ -13,18 +14,19 @@ def calculate():
         current = Cm.calculate_circuit(v, r, p, e, i)
 
         if current is not None:
-            current = round(float(current), 4)
-
+            current = round(float(current), 7)
+            result["text"] = str(current) + " A"
         else:
             current = "Revise estimación y gráfica"
-        result["text"] = current
-
-        fig, ax = plt.subplots()
-        x = np.linspace(-1, 20, 1000)
-        ax.plot(x, r * x ** 2 - v * x + p)
-        ax.axhline(y=0, color='k')
-        ax.axvline(x=0, color='k')
-        plt.show()
+            result["text"] = current
+            plt.clf()
+            plt.close()
+            fig, ax = plt.subplots(num="Resultado")
+            x = np.linspace(-1, 20, 1000)
+            ax.plot(x, r * x ** 2 - v * x + p)
+            ax.axhline(y=0, color='k')
+            ax.axvline(x=0, color='k')
+            plt.show()
 
     except ValueError:
         result["text"] = "Entrada no correcta"
