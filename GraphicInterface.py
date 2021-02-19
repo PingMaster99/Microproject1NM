@@ -1,6 +1,7 @@
 from tkinter import *
 import CalculationMethods as Cm
-
+import matplotlib.pyplot as plt
+import numpy as np
 
 def calculate():
     try:
@@ -8,12 +9,22 @@ def calculate():
         r = float(resistance.get())
         p = float(power.get())
         e = float(error.get())
-        current = Cm.calculate_circuit(v, r, p, e)
+        i = float(initial_point.get())
+        current = Cm.calculate_circuit(v, r, p, e, i)
+
         if current is not None:
             current = round(float(current), 4)
+
         else:
-            current = "El circuito no es posible"
+            current = "Revise estimación y gráfica"
         result["text"] = current
+
+        fig, ax = plt.subplots()
+        x = np.linspace(-1, 20, 1000)
+        ax.plot(x, r * x ** 2 - v * x + p)
+        ax.axhline(y=0, color='k')
+        ax.axvline(x=0, color='k')
+        plt.show()
 
     except ValueError:
         result["text"] = "Entrada no correcta"
@@ -70,6 +81,13 @@ error.grid(row=4, column=2)
 e_title = Label(window, text="Error", bg="#3891A6", fg="BLACK")
 e_title.config(font=("Arial", 20))
 e_title.grid(row=4, column=1)
+
+initial_point = Entry(window, font="Arial 20")
+initial_point.grid(row=5, column=2)
+i_title = Label(window, text="Punto inicial", bg="#3891A6", fg="BLACK")
+i_title.config(font=("Arial", 20))
+i_title.grid(row=5, column=1)
+initial_point.insert(0, "1")
 
 result = Label(window)
 result.grid(row=6, column=2)

@@ -30,7 +30,7 @@ def fixed_point(function, x0, expected_error, imax):
         return None
 
 
-def calculate_circuit(voltage, resistance, power, error):
+def calculate_circuit(voltage, resistance, power, error, initial_point):
     if power != 0:
         kirchhoff = f"({resistance} * x ** 2 + {power}) / {voltage}"
     else:
@@ -38,7 +38,8 @@ def calculate_circuit(voltage, resistance, power, error):
     if resistance == 0 and power == 0:
         return None
 
-    result = fixed_point(kirchhoff, 1, error, 100)
+    result = fixed_point(kirchhoff, initial_point, error, 100)
+
     if result is not None:
         return result[0]
 
