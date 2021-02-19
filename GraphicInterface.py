@@ -7,7 +7,8 @@ def calculate():
         v = float(voltage.get())
         r = float(resistance.get())
         p = float(power.get())
-        current = Cm.calculate_circuit(v, r, p)
+        e = float(error.get())
+        current = Cm.calculate_circuit(v, r, p, e)
         if current is not None:
             current = round(float(current), 4)
         else:
@@ -38,6 +39,9 @@ resistance.pack()
 
 power = Entry(window, font="Arial 20")
 power.pack()
+
+error = Entry(window, font="Arial 20")
+error.pack()
 
 result = Label(window)
 result.pack()
