@@ -61,10 +61,10 @@ def calculate_circuit(voltage, resistance, power, error, initial_point):
     # If the bulb consumes power, we check for which solution is optimal
     if power != 0:
         kirchhoff = f"({resistance} * x ** 2 + {power}) / {voltage}"
-        first_result = fixed_point(kirchhoff, initial_point, error, 100)
+        first_result = fixed_point(kirchhoff, initial_point, error, 1000)
 
         kirchhoff1 = f"(({voltage} * x - {power})/{resistance}) ** 0.5"
-        second_result = fixed_point(kirchhoff1, initial_point, error, 100)
+        second_result = fixed_point(kirchhoff1, initial_point, error, 1000)
 
         if first_result is not None and second_result is not None:
             first_current = first_result[0]
